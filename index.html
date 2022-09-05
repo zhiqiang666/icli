@@ -1,110 +1,182 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>专属</title>
-    <style type="text/css">
-      @font-face {
-        font-family: digit;
-        src: url("digital-7_mono.ttf") format("truetype");
-      }
-    </style>
-
-    <link href="css/default.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/garden.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
     <style>
-		#code{
-			font-size: 25px;
-		}
-      #words {
-        text-align: center;
-		font-size: 50px;
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        animation: body 4s ease infinite;
+      }
+
+      .heart {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 200px auto;
+        background-color: #ff557f;
+        /* 顺时针旋转45度 */
+        transform: rotate(45deg);
+        animation: heart 4s ease infinite;
+      }
+
+      .heart::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: #ff557f;
+        /* 变成圆形 */
+        border-radius: 50%;
+        top: -100px;
+        left: 0;
+        animation: left 4s ease infinite;
+        transition: all 1s ease;
+      }
+
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: #ff557f;
+        /* 变成圆形 */
+        border-radius: 50%;
+        top: 0;
+        left: 100px;
+        animation: right 4s ease infinite;
+        transition: all 1s ease;
+      }
+
+      @keyframes body {
+        0% {
+          background-color: #ff557f;
+        }
+
+        50% {
+          background-color: #fff;
+        }
+
+        100% {
+          background-color: #ff557f;
+        }
+      }
+
+      @keyframes heart {
+        0% {
+          transform: rotate(0deg);
+          border-radius: 200px;
+          background-color: #fff;
+        }
+
+        30% {
+          transform: rotate(45deg);
+          border-radius: 10px;
+        }
+
+        50% {
+          background-color: #ff557f;
+        }
+
+        70% {
+          transform: rotate(45deg);
+          border-radius: 10px;
+        }
+
+        100% {
+          transform: rotate(90deg);
+          border-radius: 200px;
+          background-color: #fff;
+        }
+      }
+
+      @keyframes left {
+        0% {
+          top: 0;
+          background-color: #fff;
+        }
+
+        30% {
+          top: -100px;
+        }
+
+        50% {
+          background-color: #ff557f;
+        }
+
+        70% {
+          top: -100px;
+        }
+
+        100% {
+          top: 0;
+          background-color: #fff;
+        }
+      }
+
+      @keyframes right {
+        0% {
+          left: 0;
+          background-color: #fff;
+        }
+
+        30% {
+          left: -100px;
+        }
+
+        50% {
+          background-color: #ff557f;
+        }
+
+        70% {
+          left: -100px;
+        }
+
+        100% {
+          left: 0;
+          background-color: #fff;
+        }
+      }
+      .label {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .label {
+        color: white;
+        animation: label 4s ease infinite;
+      }
+
+      @keyframes label {
+        0% {
+          color: #fff;
+          font-size: 40px;
+        }
+
+        50% {
+          color: #ff557f;
+          font-size: 100px;
+        }
+
+        100% {
+          color: #fff;
+          font-size: 40px;
+        }
       }
     </style>
   </head>
-
   <body>
-    <div id="mainDiv">
-      <div id="content">
-        <div id="code">
-          郑岩
-          <!-- <span class="comments">/**</span><br />
-			<span class="space"/><span class="comments">*2016—01-01,</span><br />
-			<span class="space"/><span class="comments">*2016-07-26.</span><br />
-			<span class="space"/><span class="comments">*/</span><br />
-			Boy name = <span class="keyword">Mr</span> LI<br />
-			Girl name = <span class="keyword">Mrs</span> ZHANG<br />
-			<span class="comments">// Fall in love river. </span><br />
-			The boy love the girl;<br />
-			<span class="comments">// They love each other.</span><br />
-			The girl loved the boy;<br />
-			<span class="comments">// AS time goes on.</span><br />
-			The boy can not be separated the girl;<br />
-			<span class="comments">// At the same time.</span><br />
-			The girl can not be separated the boy;<br />
-			<span class="comments">// Both wind and snow all over the sky.</span><br />
-			<span class="comments">// Whether on foot or 5 kilometers.</span><br />
-			<span class="keyword">The boy</span> very <span class="keyword">happy</span>;<br />
-			<span class="keyword">The girl</span> is also very <span class="keyword">happy</span>;<br />
-			<span class="placeholder"/><span class="comments">// Whether it is right now</span><br />
-			<span class="placeholder"/><span class="comments">// Still in the distant future.</span><br />
-			<span class="placeholder"/>The boy has but one dream;<br />
-			<span class="comments">// The boy wants the girl could well have been happy.</span><br />
-			<br>
-			<br>
-			I want to say:<br />
-			Baby, I love you forever;<br /> -->
-        </div>
-        <div id="loveHeart">
-          <canvas id="garden"></canvas>
-          <div id="words">
-            <div id="messages">
-              禁止EMO
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="copyright">
-        <a href="#">....</a><br />
-        <a href="#">....</a><br />
-      </div>
+    <div class="heart"></div>
+    <div class="label">
+      拥有好心情
     </div>
-
-    <script type="text/javascript">
-      var offsetX = $("#loveHeart").width() / 2;
-      var offsetY = $("#loveHeart").height() / 2 - 55;
-      var together = new Date();
-      together.setFullYear(2016, 1, 1);
-      together.setHours(0);
-      together.setMinutes(0);
-      together.setSeconds(0);
-      together.setMilliseconds(0);
-
-      if (!document.createElement("canvas").getContext) {
-        var msg = document.createElement("div");
-        msg.id = "errorMsg";
-        msg.innerHTML =
-          "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
-        document.body.appendChild(msg);
-        $("#code").css("display", "none");
-        $("#copyright").css("position", "absolute");
-        $("#copyright").css("bottom", "10px");
-        document.execCommand("stop");
-      } else {
-        setTimeout(function() {
-          startHeartAnimation();
-        }, 1000);
-
-        timeElapse(together);
-        setInterval(function() {
-          timeElapse(together);
-        }, 500);
-
-        adjustCodePosition();
-        $("#code").typewriter();
-      }
-    </script>
   </body>
 </html>
